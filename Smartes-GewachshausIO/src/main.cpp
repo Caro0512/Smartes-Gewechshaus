@@ -29,7 +29,7 @@ void loop() {
 
  
   if (isnan(luftfeuchte)) {
-    Serial.println("Fehler beim Auslesen des DHT11 Sensors!");
+    Serial.println("Die Luftfeuchtigkeit passt nicht!");
   } else {
     Serial.print("Luftfeuchtigkeit: ");
     Serial.print(luftfeuchte);
