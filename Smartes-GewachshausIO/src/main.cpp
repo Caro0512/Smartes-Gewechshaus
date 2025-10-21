@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include "DHT.h"
 
-// --- Pin-Definitionen ---
-const int BODEN_SENSOR_PIN = 34; 
+
+const int Bodenfeutchtigkeit = 34; 
+const float SwimmingPoolLevel = 35;
 #define DHTPIN 18                
 #define DHTTYPE DHT11
 
@@ -11,25 +12,31 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200); 
-  Serial.println("Kombinierter Sensor-Test gestartet!");
+  Serial.println("Ausgabe funktioniert!");
   
   dht.begin(); 
+  pinMode(SwimmingPoolLevel, INPUT_PULLUP);
 }
 
 void loop() {
   
-  int bodenWert = analogRead(BODEN_SENSOR_PIN);
+  int bodenWert = analogRead(Bodenfeutchtigkeit);
 
 
   float luftfeuchte = dht.readHumidity();
 
+  float poolLevel = analogRead(SwimmingPoolLevel);
 
-  Serial.print("Bodenfeuchtigkeit (Rohwert): ");
+
+  Serial.print("Bodenfeuchtigkeit: ");
   Serial.println(bodenWert);
+
+  Serial.print("Swimming Pool Level: ");
+  Serial.println(poolLevel);
 
  
   if (isnan(luftfeuchte)) {
-    Serial.println("Fehler beim Auslesen des DHT11 Sensors!");
+    Serial.println("Fehler beim Auslesen des Luftfeuchtigkeit Sensors!");
   } else {
     Serial.print("Luftfeuchtigkeit: ");
     Serial.print(luftfeuchte);
