@@ -3,7 +3,7 @@
 
 
 const int Bodenfeutchtigkeit = 34; 
-const float SwimmingPoolLevel = 35;
+const float SwimmingPoolLevel = 14;
 #define DHTPIN 18                
 #define DHTTYPE DHT11
 
@@ -25,7 +25,7 @@ void loop() {
 
   float luftfeuchte = dht.readHumidity();
 
-  float poolLevel = analogRead(SwimmingPoolLevel);
+  float poolLevel = digitalRead(SwimmingPoolLevel);
 
 
   Serial.print("Bodenfeuchtigkeit: ");
